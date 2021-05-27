@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    .wrapper {
+      position: relative;
+      min-height: 100%;
+    }
+
+    .content {
+      padding-bottom: 90px;
+    }
+
+    .footer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+    }
+
+    .draggable {
+      background-color: aquamarine;
+      width: 100px;
+      height: 100px;
+    }
+
+    button[name="formBtn"] {
+      background: red;
+    }
+
+    .block1 {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      left: 50px;
+      top: 50px;
+      color: white;
+      background: blue;
+    }
+
+    #bottom {
+      padding-top: 10px;
+    }
+
+    body {
+      -moz-background-size: 100%;
+      /* Firefox 3.6+ */
+      -webkit-background-size: 100%;
+      /* Safari 3.1+ и Chrome 4.0+ */
+      -o-background-size: 100%;
+      /* Opera 9.6+ */
+      background-size: 100%;
+      /* Современные браузеры */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="content">
+    </div>
+  </div>
+  <div class="footer"><button type="submit" name="formBtn" onclick="addbutton()">Добавить кнопку</button>
+    <button type="submit" name="formBtn" onclick="addsize()">+</button>
+    <button type="submit" name="formBtn" onclick="smallsize()">-</button>
+    <div id="bottom"></div>
+    <!-- <button onclick="document.getElementById('file-input').click();">Open</button>
+    <input id="file-input" type="file" name="name" style="display: none;" /> -->
+  </div>
+  </div>
+</body>
+
+<script>
+  let size = 100;
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.onchange = e => {
+    var file = e.target.files[0];
+    document.body.style.backgroundImage = "url('" + file.name + "')";
+  }
+  document.getElementById('bottom').appendChild(input);
+  function addsize() {
+    size = size + 10;
+    changesize();
+  }
+  function smallsize() {
+    size = size - 10;
+    changesize();
+  }
+  function changesize() {
+    let elem = document.getElementsByClassName('block1');
+    for (i = 0; i < elem.length; i++) {
+      elem[i].style.width = size + "px";
+      elem[i].style.height = size + "px";
+    }
+  }
+  function addev(div) {
+    var listener = function (e) {
+      div.style.left = e.pageX - 50 + "px";
+      div.style.top = e.pageY - 50 + "px";
+    };
+    div.addEventListener('mousedown', e => {
+      document.addEventListener('mousemove', listener);
+    });
+
+    div.addEventListener('mouseup', e => {
+      document.removeEventListener('mousemove', listener);
+    });
+  }
+  function changename(div) {
+    result = prompt('Введите текст кнопки', 'Новая кнопка');
+    this.innerHTML = result;
+  }
+  function addbutton() {
+    let div = document.createElement('div');
+    div.className = "btn btn-primary block1";
+    div.innerHTML = "Новая кнопка";
+    document.getElementById('content').appendChild(div);
+    addev(div);
+    div.addEventListener('dblclick', changename);
+  }
+</script>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0px;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .item {
+            background-color: darkOrchid;
+            border-radius: 0.25em;
+            counter-increment: item;
+
+
+        }
+
+        /* This statement is needed for the flexbox layout */
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -10px;
+            width: calc(100% + 20px);
+
+            counter-reset: item;
+        }
+
+        /* We also need to size the flex items */
+        .flex .item {
+            width: calc((100% / 3) - 20px);
+            margin: 0 10px 20px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="flex">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+            <div class="item">7</div>
+            <div class="item">8</div>
+            <div class="item">9</div>
+            <div class="item">10</div>
+        </div>
+    </div>
+</body>
+
+</html>
